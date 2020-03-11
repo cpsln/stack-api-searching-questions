@@ -3,6 +3,7 @@
 # dependencies
 /backend/__pycache__
 /backend/app/__pycache__
+/backend/app/migrations/__pycache__
 
 /backend/teamwork/__pycache__
 
