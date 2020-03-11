@@ -12,6 +12,7 @@ This is a Guide for setup for this application.
         
 3. Go to "/opt/teamwork/" and Clone Repository:
 
+        $ $ cd /opt/teamwork
         $ git clone https://github.com/cpsln/stack-api-searching-questions.git 
 
 4. Install and Setup virtualenv (Also includes setup for workon)
