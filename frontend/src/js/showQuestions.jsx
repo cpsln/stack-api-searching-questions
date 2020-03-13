@@ -12,6 +12,32 @@ class ShowQuestions extends Component {
     noResult: false
   }
 
+  componentDidMount() {
+    this.setState({
+      loading: true,
+      searchQuestions: []
+    })
+    fetch(
+      'http://127.0.0.1:8000/search/cache'
+    )
+      .then(res => res.json())
+      .then(res => {
+        if (res.status) {
+
+          this.setState({
+            searchQuestions: res.data,
+            searchInput: res.question,
+            loading: false
+          })
+
+        } else {
+          this.setState({
+            loading: false
+          })
+
+        }
+      })
+  }
   searchInputHandler = (e) => {
 
     let value = e.target.value
@@ -34,7 +60,7 @@ class ShowQuestions extends Component {
 
       this.setState({
         loading: true,
-        searchQuestions:[]
+        searchQuestions: []
       })
 
       fetch(
