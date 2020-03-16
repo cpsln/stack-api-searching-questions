@@ -16,8 +16,15 @@ def chache_data(requests):
 
 def search_question_stack(request,question):
     if request.method == "GET":
+        chache_data=''
         try:
             
+            chache_data = queue.get("stack")
+            if chache_data:
+                chache_data = eval(chache_data)
+                if chache_data[1] == question:
+                    return JsonResponse({"status": True, "data":chache_data[0]})
+
             url = 'https://api.stackexchange.com/2.2/search/advanced?title='+question+'&site=stackoverflow'
 
             r = requests.get(url)
@@ -28,9 +35,10 @@ def search_question_stack(request,question):
             queue.set("stack",a)
 
             if len(all_questions['items']):
-                return JsonResponse({"status": True, "data":all_questions["items"]})
+                return JsonResponse({"status": True, "data":all_questions["items"], "question":question})
             else:
                 return JsonResponse({"status": False})
+
         except Exception as e:
             return JsonResponse({"status": False})
 
